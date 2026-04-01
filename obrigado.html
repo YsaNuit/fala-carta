@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obrigado — Fala, Carta!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #1a1025;
+            --bg-secondary: #2d1f3d;
+            --accent-primary: #c9a96e;
+            --accent-secondary: #9b7fd4;
+            --text-primary: #f0e6d3;
+            --text-secondary: #b8a99a;
+            --font-title: 'Cormorant Garamond', serif;
+            --font-body: 'Raleway', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-weight: 300;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Constellation Background Pattern */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(1px 1px at 20px 30px, var(--text-secondary), rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 40px 70px, var(--accent-primary), rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 50px 160px, var(--text-secondary), rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 80px 120px, var(--accent-secondary), rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 110px 210px, var(--text-secondary), rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 150px 45px, var(--accent-primary), rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-title);
+            font-weight: 700;
+            color: var(--accent-primary);
+            line-height: 1.2;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+            width: 60%;
+            margin: 40px auto;
+            opacity: 0.4;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .icon-large {
+            font-size: 3.5rem;
+            color: var(--accent-primary);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .header h1 {
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            font-style: italic;
+            margin-bottom: 16px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Central Section */
+        .central-section {
+            background-color: var(--bg-secondary);
+            padding: 50px 40px;
+            border-radius: 8px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .central-section .icon-accent {
+            font-size: 2rem;
+            color: var(--accent-primary);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .central-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .central-section .subtitle {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .central-section p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Button */
+        .btn {
+            display: inline-block;
+            padding: 18px 40px;
+            background-color: var(--accent-primary);
+            color: var(--bg-primary);
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--accent-primary);
+            border-radius: 4px;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--accent-primary);
+        }
+
+        /* Final Section */
+        .final-section {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .final-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .steps-list {
+            list-style: none;
+            max-width: 500px;
+            margin: 0 auto 30px;
+            text-align: left;
+        }
+
+        .steps-list li {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        .steps-list li::before {
+            content: "♠";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.5rem;
+            color: var(--accent-primary);
+        }
+
+        .footer-note {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-top: 30px;
+        }
+
+        .footer-note a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-note a:hover {
+            color: var(--accent-secondary);
+        }
+
+        /* Footer */
+        footer {
+            padding: 30px 20px;
+            border-top: 1px solid rgba(201, 169, 110, 0.1);
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .central-section {
+                padding: 30px 20px;
+                margin: 30px 0;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .central-section h2 {
+                font-size: 1.4rem;
+            }
+
+            .central-section .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .icon-large {
+                font-size: 2.5rem;
+            }
+
+            .steps-list li {
+                padding-left: 35px;
+                font-size: 1rem;
+            }
+
+            .steps-list li::before {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- HEADER SECTION -->
+        <div class="header">
+            <span class="icon-large">♠</span>
+            <h1>Sua vaga está garantida!</h1>
+            <p>Bem-vinda à Imersão Fala, Carta! Nos dias 11 e 12 de abril a gente vai finalmente fazer as cartas falarem. ✨</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- CENTRAL SECTION -->
+        <div class="central-section">
+            <span class="icon-accent">♣</span>
+            <h2>Agora tem um passo importante</h2>
+            <p class="subtitle">👇 Entre no grupo do WhatsApp</p>
+            <p>É pelo grupo que você vai receber o link do Zoom para acessar a imersão nos dois dias de evento. Não fique de fora por esquecer de entrar agora!</p>
+            <a href="https://chat.whatsapp.com/EDpb24Dnhs6CRVxWkNTQPw" target="_blank" class="btn">ENTRAR NO GRUPO AGORA</a>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- FINAL SECTION -->
+        <div class="final-section">
+            <h3>O que acontece agora</h3>
+            <ul class="steps-list">
+                <li>Você entra no grupo</li>
+                <li>Nos dias 11 e 12 de abril, o link do Zoom chega por lá</li>
+                <li>Você acessa ao vivo e mergulha no idioma do Tarot</li>
+            </ul>
+            <p class="footer-note">
+                Qualquer dúvida, me chama no <a href="https://wa.me/5585986558631?text=Oi!%20Tive%20uma%20d%C3%BAdida%20ap%C3%B3s%20me%20inscrever%20na%20Fala%2C%20Carta!" target="_blank">WhatsApp 🎴</a>
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        © 2025 Fala, Carta! — todos os direitos reservados.
+    </footer>
+
+</body>
+</html>

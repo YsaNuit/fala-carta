@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fala, Carta! — Imersão de Tarot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #1a1025;
+            --bg-secondary: #2d1f3d;
+            --accent-primary: #c9a96e;
+            --accent-secondary: #9b7fd4;
+            --text-primary: #f0e6d3;
+            --text-secondary: #b8a99a;
+            --font-title: 'Cormorant Garamond', serif;
+            --font-body: 'Raleway', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-weight: 300;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Constellation Background Pattern */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(1px 1px at 20px 30px, var(--text-secondary), rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 40px 70px, var(--accent-primary), rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 50px 160px, var(--text-secondary), rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 80px 120px, var(--accent-secondary), rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 110px 210px, var(--text-secondary), rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 150px 45px, var(--accent-primary), rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-title);
+            font-weight: 700;
+            color: var(--accent-primary);
+            line-height: 1.2;
+        }
+
+        section {
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .bg-alt {
+            background-color: var(--bg-secondary);
+            max-width: 100%;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+            width: 60%;
+            margin: 40px auto;
+            opacity: 0.4;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 18px 32px;
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-weight: 400;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-primary);
+            color: var(--bg-primary);
+            border: 1px solid var(--accent-primary);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--accent-primary);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--accent-primary);
+            border: 1px solid var(--accent-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-primary);
+            color: var(--bg-primary);
+        }
+
+        @media (max-width: 768px) {
+            .btn-primary {
+                background-color: var(--accent-primary) !important;
+                color: var(--bg-primary) !important;
+                border: 1px solid var(--accent-primary) !important;
+            }
+
+            .btn-primary:hover {
+                background-color: var(--accent-primary) !important;
+                color: var(--bg-primary) !important;
+            }
+        }
+
+        /* Section 1: Hero */
+        .hero {
+            padding-top: 120px;
+            padding-bottom: 100px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-style: italic;
+            margin-bottom: 24px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Section 2: Problema */
+        .problema h2 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+        }
+
+        .problema p {
+            margin-bottom: 24px;
+            font-size: 1.1rem;
+        }
+
+        .destaque-frase {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            color: var(--accent-primary);
+            margin: 40px 0;
+            font-style: italic;
+        }
+
+        /* Section 3: O que é */
+        .o-que-e h2 {
+            margin-bottom: 30px;
+        }
+
+        .o-que-e p {
+            margin-bottom: 20px;
+        }
+
+        .card-ia {
+            border: 1px solid var(--accent-primary);
+            padding: 30px;
+            margin-top: 40px;
+            background: rgba(201, 169, 110, 0.05);
+            border-radius: 4px;
+        }
+
+        /* Section 4: Para quem */
+        .para-quem h2 {
+            margin-bottom: 40px;
+        }
+
+        .lista-beneficios {
+            list-style: none;
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .lista-beneficios li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .lista-beneficios li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 14px;
+            width: 20px;
+            height: 1px;
+            background-color: var(--accent-primary);
+        }
+
+        /* Section 5: O que vai levar */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .card-entrega {
+            padding: 40px 20px;
+            border: 1px solid rgba(201, 169, 110, 0.2);
+            background: rgba(255, 255, 255, 0.02);
+            transition: transform 0.3s ease;
+        }
+
+        .card-entrega:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-primary);
+        }
+
+        .card-entrega .icon {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* Section 6: Detalhes */
+        .detalhes-grid {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .detalhe-item {
+            font-size: 1.2rem;
+        }
+
+        /* Section 7: Investimento */
+        .investimento h2 {
+            margin-bottom: 20px;
+        }
+
+        .preco {
+            font-size: 4rem;
+            color: var(--accent-primary);
+            font-family: var(--font-title);
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        .nota-gravacao {
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .whatsapp-note {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 20px;
+            border-top: 1px solid rgba(201, 169, 110, 0.1);
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .grid-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .detalhes-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .preco {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SECTION 1: HERO -->
+    <section class="hero">
+        <h1>Você estuda Tarot há meses (ou anos)... e ainda trava na hora de ler?</h1>
+        <p>O problema não é você. É que ninguém te ensinou o idioma.</p>
+        <div class="btn-group">
+            <a href="https://pay.herospark.com/workshop-fala-carta-513068" class="btn btn-primary">QUERO MINHA VAGA — R$ 37</a>
+            <a href="https://wa.me/5585986558631?text=Oi!%20Quero%20entrar%20em%20dupla%20na%20Fala%2C%20Carta!" target="_blank" class="btn btn-secondary">Quero entrar em dupla ♠</a>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 2: PROBLEMA -->
+    <section class="problema">
+        <h2>O Tarot tem uma linguagem própria. E você ainda não a aprendeu.</h2>
+        <p>Você decorou palavras-chave. Leu livros. Assistiu vídeos. Mas na hora de pegar as cartas e fazer uma leitura, bate aquela sensação de vazio — como se as cartas estivessem mudas.</p>
+        <div class="destaque-frase">
+            "Elas não estão mudas. Você ainda não aprendeu a língua delas."
+        </div>
+        <p>É exatamente isso que a Imersão Fala, Carta! veio resolver.</p>
+    </section>
+
+    <!-- SECTION 3: O QUE É -->
+    <div class="bg-alt">
+        <section class="o-que-e">
+            <h2>O que é a Fala, Carta!</h2>
+            <p>Uma imersão online e ao vivo, nos dias 11 e 12 de abril, onde você vai parar de memorizar e começar a conversar com o Tarot.</p>
+            <p>Durante dois dias, você vai mergulhar na linguagem simbólica das cartas — entendendo o que cada símbolo comunica, como os arcanos se conectam e por que suas leituras vão começar a fluir naturalmente quando você dominar esse idioma.</p>
+            <div class="card-ia">
+                ✨ Um bloco inteiro da imersão será dedicado ao uso estratégico da Inteligência Artificial para acelerar seu aprendizado no Tarot e criar conteúdo — porque estudar com as ferramentas certas muda tudo.
+            </div>
+        </section>
+    </div>
+
+    <!-- SECTION 4: PARA QUEM -->
+    <section class="para-quem">
+        <h2>Para quem é essa imersão</h2>
+        <ul class="lista-beneficios">
+            <li>Para você que já estudou Tarot mas ainda trava na hora da leitura</li>
+            <li>Para você que conhece as cartas mas não consegue conectar uma história</li>
+            <li>Para você que quer finalmente sair do modo "decoreba" e entrar no modo fluência</li>
+        </ul>
+    </section>
+
+    <!-- SECTION 5: O QUE VAI LEVAR -->
+    <div class="bg-alt">
+        <section class="o-que-vai-levar">
+            <h2>O que você vai levar</h2>
+            <div class="grid-cards">
+                <div class="card-entrega">
+                    <span class="icon">🎴</span>
+                    <p>A chave para entender a linguagem simbólica do Tarot</p>
+                </div>
+                <div class="card-entrega">
+                    <span class="icon">♣</span>
+                    <p>Uma nova forma de se relacionar com as cartas — sem decorar, sem travar</p>
+                </div>
+                <div class="card-entrega">
+                    <span class="icon">♠</span>
+                    <p>O uso da IA como aliada no seu estudo e na criação de conteúdo sobre Tarot</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- SECTION 6: DETALHES -->
+    <section class="detalhes">
+        <h2>Detalhes do evento</h2>
+        <div class="detalhes-grid">
+            <div class="detalhe-item">📅 Dias 11 e 12 de abril</div>
+            <div class="detalhe-item">💻 Ao vivo, pelo Zoom</div>
+            <div class="detalhe-item">🎟️ Apenas 100 vagas</div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: INVESTIMENTO -->
+    <div class="bg-alt">
+        <section class="investimento">
+            <h2>Investimento</h2>
+            <div class="preco">R$ 37,00</div>
+            <p class="nota-gravacao">Quer adicionar a gravação completa da imersão? Ela estará disponível como opção no momento da sua inscrição.</p>
+            
+            <div class="btn-group">
+                <a href="https://pay.herospark.com/workshop-fala-carta-513068" class="btn btn-primary">QUERO MINHA VAGA — R$ 37</a>
+                <a href="https://wa.me/5585986558631?text=Oi!%20Quero%20entrar%20em%20dupla%20na%20Fala%2C%20Carta!" target="_blank" class="btn btn-secondary">Quero entrar em dupla ♠</a>
+            </div>
+
+            <p class="whatsapp-note">Quer entrar em dupla com uma amiga? Me chama no WhatsApp — tenho uma condição especial para vocês duas.</p>
+        </section>
+    </div>
+
+    <footer>
+        © 2025 Fala, Carta! — todos os direitos reservados.
+    </footer>
+
+</body>
+</html>
